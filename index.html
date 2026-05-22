@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Saifur Rahman — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f6f2;
+      --surface: #eeecea;
+      --ink: #1a1916;
+      --ink-muted: #6b6860;
+      --accent: #2d5be3;
+      --accent-light: #e8edfc;
+      --border: #dddbd5;
+      --mono: 'DM Mono', monospace;
+      --serif: 'DM Serif Display', serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(247,246,242,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── SECTIONS ── */
+    section { padding: 96px 48px; max-width: 860px; margin: 0 auto; }
+    section + section { border-top: 1px solid var(--border); }
+
+    /* ── HERO ── */
+    #hero {
+      padding-top: 148px;
+      padding-bottom: 88px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: end;
+    }
+    .hero-left { }
+    .hero-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(38px, 5vw, 56px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--ink-muted);
+    }
+    .hero-desc {
+      color: var(--ink-muted);
+      font-size: 15px;
+      line-height: 1.75;
+      max-width: 380px;
+      margin-bottom: 32px;
+    }
+    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+      display: inline-block;
+    }
+    .btn-primary { background: var(--ink); color: var(--bg); }
+    .btn-primary:hover { background: var(--accent); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink-muted);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      animation: fadeUp 0.6s ease both;
+    }
+    .stat-card:nth-child(1) { animation-delay: 0.1s; }
+    .stat-card:nth-child(2) { animation-delay: 0.2s; }
+    .stat-card:nth-child(3) { animation-delay: 0.3s; }
+    .stat-icon {
+      font-size: 20px;
+      width: 40px;
+      height: 40px;
+      background: var(--bg);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+    .stat-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SKILLS ── */
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 36px;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(26px, 3vw, 34px);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      color: var(--ink-muted);
+      margin-bottom: 40px;
+      max-width: 520px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .skill-group-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 3px 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--ink-muted);
+    }
+
+    /* ── PROJECTS ── */
+    .projects-list { display: flex; flex-direction: column; gap: 1px; }
+    .project-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .project-row:first-child { border-top: 1px solid var(--border); }
+    .project-row:hover .project-title { color: var(--accent); }
+
+    .project-number {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .project-title {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+    .project-desc {
+      font-size: 13px;
+      color: var(--ink-muted);
+      max-width: 500px;
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+    .project-stack { display: flex; gap: 6px; flex-wrap: wrap; }
+    .project-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 3px;
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+    .project-arrow {
+      font-size: 18px;
+      color: var(--border);
+      margin-top: 4px;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .project-row:hover .project-arrow {
+      color: var(--accent);
+      transform: translate(2px, -2px);
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-list { display: flex; flex-direction: column; gap: 28px; }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 32px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-date {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--ink-muted);
+      padding-top: 3px;
+    }
+    .exp-role {
+      font-weight: 500;
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
+    .exp-org {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .exp-desc {
+      font-size: 13px;
+      color: var(--ink-muted);
+      line-height: 1.7;
+    }
+
+    /* ── CONTACT ── */
+    #contact { text-align: center; padding-bottom: 80px; }
+    #contact h2 { margin-bottom: 12px; }
+    #contact .section-sub { margin: 0 auto 36px; }
+    .contact-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 48px;
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    footer p {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--ink-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      nav { padding: 16px 24px; }
+      .nav-links { gap: 20px; }
+      section { padding: 72px 24px; }
+      #hero {
+        grid-template-columns: 1fr;
+        padding-top: 120px;
+        gap: 40px;
+      }
+      .skills-grid { grid-template-columns: 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 4px; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">SR /</a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <span class="hero-tag">Open to opportunities</span>
+    <h1>Saifur<br><em>Rahman</em></h1>
+    <p class="hero-desc">
+      Master's student in data science with a focus on time series analysis, statistical modelling, and machine learning. Building rigorous, reproducible solutions to real-world problems.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-card">
+      <div class="stat-icon">📈</div>
+      <div>
+        <div class="stat-label">Focus area</div>
+        <div class="stat-value">Time Series & Forecasting</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🎓</div>
+      <div>
+        <div class="stat-label">Degree</div>
+        <div class="stat-value">M.Sc. — In Progress</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🔐</div>
+      <div>
+        <div class="stat-label">Interest</div>
+        <div class="stat-value">Cryptography & Security</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">02 — Skills</p>
+  <h2>Technical toolkit</h2>
+  <p class="section-sub">Languages, frameworks, and tools I use to build and analyse.</p>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">Languages</div>
+      <div class="skill-tags">
+        <span class="skill-tag">R</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">LaTeX</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Data / ML</div>
+      <div class="skill-tags">
+        <span class="skill-tag">tidyverse</span>
+        <span class="skill-tag">forecast</span>
+        <span class="skill-tag">rugarch</span>
+        <span class="skill-tag">pandas</span>
+        <span class="skill-tag">scikit-learn</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Methods</div>
+      <div class="skill-tags">
+        <span class="skill-tag">ARIMA</span>
+        <span class="skill-tag">GARCH</span>
+        <span class="skill-tag">VAR</span>
+        <span class="skill-tag">ADF/KPSS</span>
+        <span class="skill-tag">Regime Switching</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Cryptography</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Garbled Circuits</span>
+        <span class="skill-tag">MPC</span>
+        <span class="skill-tag">PSI</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Tools</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">R Markdown</span>
+        <span class="skill-tag">Jupyter</span>
+        <span class="skill-tag">VS Code</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Soft skills</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Research</span>
+        <span class="skill-tag">Technical writing</span>
+        <span class="skill-tag">Reproducibility</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">03 — Projects</p>
+  <h2>Selected work</h2>
+  <p class="section-sub">A mix of coursework, personal projects, and research. Replace these with your own.</p>
+  <div class="projects-list">
+
+    <div class="project-row">
+      <div>
+        <div class="project-number">01</div>
+        <div class="project-title">WTI Crude Oil Price Forecasting</div>
+        <div class="project-desc">
+          End-to-end time series analysis of WTI crude oil prices using ARIMA and GARCH models in R. Covers stationarity testing, structural break detection around 2008/2014/2020 market events, and out-of-sample forecasting evaluation.
+        </div>
+        <div class="project-stack">
+          <span class="project-tag">R</span>
+          <span class="project-tag">ARIMA</span>
+          <span class="project-tag">GARCH</span>
+          <span class="project-tag">FRED API</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+
+    <div class="project-row">
+      <div>
+        <div class="project-number">02</div>
+        <div class="project-title">Garbled Circuits & Private Set Intersection</div>
+        <div class="project-desc">
+          Jupyter notebook exploration of Yao's Garbled Circuits protocol and private set intersection, implementing MPC primitives from scratch to understand their security guarantees.
+        </div>
+        <div class="project-stack">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">Cryptography</span>
+          <span class="project-tag">MPC</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+
+    <div class="project-row">
+      <div>
+        <div class="project-number">03</div>
+        <div class="project-title">Your Next Project</div>
+        <div class="project-desc">
+          Add a third project here — a Kaggle competition result, a research paper, a dashboard, or an open-source contribution. Show range.
+        </div>
+        <div class="project-stack">
+          <span class="project-tag">TBD</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">04 — Experience</p>
+  <h2>Background</h2>
+  <p class="section-sub">Academic and professional history. Update dates, roles, and descriptions below.</p>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-date">2024 — Present</div>
+      <div>
+        <div class="exp-role">M.Sc. Student</div>
+        <div class="exp-org">Your University</div>
+        <div class="exp-desc">Coursework in time series analysis, statistical inference, and machine learning. Current focus on volatility modelling of commodity prices using ARIMA/GARCH frameworks.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Add dates</div>
+      <div>
+        <div class="exp-role">Role Title</div>
+        <div class="exp-org">Organisation / Company</div>
+        <div class="exp-desc">Brief description of what you did, technologies you used, and the impact you had. Keep it to 2–3 sentences.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Add dates</div>
+      <div>
+        <div class="exp-role">B.Sc. / Previous Role</div>
+        <div class="exp-org">Organisation / University</div>
+        <div class="exp-desc">Another entry — internship, undergraduate degree, research assistant position, etc.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label" style="text-align:center">05 — Contact</p>
+  <h2>Let's work together</h2>
+  <p class="section-sub">I'm actively looking for data science and software roles. Feel free to reach out.</p>
+  <div class="contact-links">
+    <a href="mailto:your@email.com" class="btn btn-primary">Email me</a>
+    <a href="https://linkedin.com/in/yourhandle" target="_blank" class="btn btn-ghost">LinkedIn</a>
+    <a href="https://github.com/yourhandle" target="_blank" class="btn btn-ghost">GitHub</a>
+    <a href="#" class="btn btn-ghost">Download CV</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Saifur Rahman</p>
+  <p>Built with HTML & CSS · Hosted on GitHub Pages</p>
+</footer>
+
+</body>
+</html>
